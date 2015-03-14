@@ -1,0 +1,72 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+        <div class="center sliding">音乐详情</div>
+    </div>
+</div>
+<div class="pages">
+    <div data-page="services" class="page">
+        <div class="page-content song">
+                <br><br>
+                <!-- header -->
+                <center class="header"><img class="logo" src="{{ data[0]['album']['picUrl'] }}"></center>
+                <!-- song info -->
+                <div class="body list-block">
+                
+                    <center data-id="{{ data[0]['id'] }}" data-url="{{ data[0]['mp3Url'] }}"> 
+                        <a href="#" class="btn btn-success glyphicon glyphicon-play-circle player" id="player"> 播放 </a>
+                        <a href="#" class="btn btn-success glyphicon glyphicon-plus"> 收藏 </a>
+                        <a href="#" class="btn btn-success glyphicon glyphicon-share"> 分享 </a>
+                    </center>
+                    <br>
+
+                    <ul id="list-album">
+                        {% for item in data %}
+                        <li>
+                            <div class="">
+                                <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title glyphicon glyphicon-bookmark"> 单曲 ：{{ item['name'] }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="">
+                                <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title glyphicon glyphicon-time"> 曲长 ：{{ item['duration']/60000 }}' 0''</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="">
+                                <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title glyphicon glyphicon-user"> 歌手 ：{{ item['artists'][0]['name'] }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="">
+                                <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title glyphicon glyphicon-list-alt"> 专辑 ：{{ item['album']['name'] }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        {% end %}
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
