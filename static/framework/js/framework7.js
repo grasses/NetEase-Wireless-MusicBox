@@ -307,6 +307,7 @@
                 el;
         
             view.handleTouchStart = function (e) {
+                console.log('start',e);
                 if (!allowViewTouchMove || !view.params.swipeBackPage || isTouched || app.swipeoutOpenedEl) return;
                 isMoved = false;
                 isTouched = true;
@@ -318,6 +319,7 @@
             };
         
             view.handleTouchMove = function (e) {
+                //console.log('move',e);
                 if (!isTouched) return;
                 var pageX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
                 var pageY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
@@ -449,6 +451,9 @@
             };
         
             view.handleTouchEnd = function (e) {
+                console.log('end',e);
+                var _target = $(e.path[0]);
+                
                 if (!isTouched || !isMoved) {
                     isTouched = false;
                     isMoved = false;
@@ -544,7 +549,7 @@
             };
             view.attachEvents = function (detach) {
                 var action = detach ? 'off' : 'on';
-                container[action](app.touchEvents.start, view.handleTouchStart);
+                container[action](app.touchEvents.start, view.handleTouchStart); 
                 container[action](app.touchEvents.move, view.handleTouchMove);
                 container[action](app.touchEvents.end, view.handleTouchEnd);
             };
@@ -3327,7 +3332,14 @@
                     $("#player").html('播放中...');
                 },
             });
-        }
+        };
+
+        app.set_volume = function(e){
+            var value = e.val();
+            $.post('/ajaxSetVolume', {'value': value}, function (e){
+                //alert('set volume success!!');
+            },'json');
+        };
 
         app.load_refash = function (){
             $.ajax({
@@ -3349,7 +3361,7 @@
                     }
                 },
             });
-        }
+        };
 
         app.closePanel = function () {
             var activePanel = $('.panel.active');
@@ -6018,6 +6030,7 @@
         app.initClickEvents = function () {
             function handleScrollTop(e) {
                 /*jshint validthis:true */
+
                 var clicked = $(this);
                 var target = $(e.target);
                 var isLink = clicked[0].nodeName.toLowerCase() === 'a' ||
@@ -6093,7 +6106,11 @@
         
                 // Collect Clicked data- attributes
                 var clickedData = clicked.dataset();
-        
+
+                if( clicked.hasClass('set-volume') ){
+                    app.set_volume( clicked );
+                }
+
                 // Smart Select
                 if (clicked.hasClass('smart-select')) {
                     if (app.smartSelectOpen) app.smartSelectOpen(clicked);
@@ -6212,12 +6229,6 @@
                             app.closeModal(pickerToClose.parents('.popover'));
                         }
                     }
-                }
-
-                // 修改
-                if (clicked.hasClass('aaa')) {
-                    console.log('fuck');
-                    $('#left-panel').click();
                 }
 
                 if (clicked.hasClass('open-picker')) {
@@ -6354,7 +6365,7 @@
                     else view.router.load(options);
                 }
             }
-            $(document).on('click', 'a, .open-panel, .close-panel, .panel-overlay, .modal-overlay, .popup-overlay, .swipeout-delete, .swipeout-close, .close-popup, .open-popup, .open-popover, .open-login-screen, .close-login-screen .smart-select, .toggle-sortable, .open-sortable, .close-sortable, .accordion-item-toggle, .close-picker', handleClicks);
+            $(document).on('click', 'set-volume, a, .open-panel, .close-panel, .panel-overlay, .modal-overlay, .popup-overlay, .swipeout-delete, .swipeout-close, .close-popup, .open-popup, .open-popover, .open-login-screen, .close-login-screen .smart-select, .toggle-sortable, .open-sortable, .close-sortable, .accordion-item-toggle, .close-picker, .set-volume', handleClicks);
             if (app.params.scrollTopOnNavbarClick || app.params.scrollTopOnStatusbarClick) {
                 $(document).on('click', '.statusbar-overlay, .navbar .center', handleScrollTop);
             }
@@ -6363,6 +6374,7 @@
             function preventScrolling(e) {
                 e.preventDefault();
             }
+
             if (app.support.touch) {
                 $(document).on((app.params.fastClicks ? 'touchstart' : 'touchmove'), '.panel-overlay, .modal-overlay, .preloader-indicator-overlay, .popup-overlay, .searchbar-overlay', preventScrolling);
             }

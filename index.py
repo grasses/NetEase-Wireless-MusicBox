@@ -30,7 +30,7 @@ import uuid
 import hashlib 
 
 # mongodb
-import pymongo
+# import pymongo
 # session
 #from mongosion import Session
 #import session
@@ -40,14 +40,13 @@ from tornado.options import define, options
 
 
 #some global information like session
-global isAdmin
-global isLogin
-global user
-global base_url
-global sid
-global typeList
 
+import play
 import api
+
+# 先初始化播放器
+global player
+player = play.Play()
 
 define("port", default=80, help="run on the given port", type=int)
 define("db", default='jueShare', help="database name", type=str)
@@ -73,6 +72,8 @@ class Application(tornado.web.Application):
             (r"/ajaxLogin", AjaxLoginHandler),
             (r"/ajaxPlayMusic", AjaxPlayMusicHandler),
             (r"/ajaxNewAlbums", AjaxNewAlbumsHandler),
+            (r"/ajaxHotSong", AjaxHotSongHandler),
+            (r"/ajaxSetVolume", AjaxSetVolumeHandler),
         ]
         
         settings = dict(
@@ -151,9 +152,7 @@ class AjaxPlayMusicHandler(tornado.web.RequestHandler):
     def post(self):
         self.set_header("Accept-Charset", "utf-8")
         req = { 'sid':self.get_argument("sid"), 'url':self.get_argument("url"), } 
-        import play
-        player = play.Play()
-        player.start()
+        #player.start()
         player.setUrl( req['url'] )
         player.main()
         self.write( tornado.escape.json_encode( {'result': True, 'info': 'play now...！！' } ) )
@@ -202,7 +201,18 @@ class AjaxGetAlbumHandler(tornado.web.RequestHandler):
         req = { 'aid':self.get_argument("aid") } 
         res = NetEase.album(  req['aid'] )
         self.write( tornado.escape.json_encode(res) )
-
+# 调节音量
+class AjaxSetVolumeHandler(tornado.web.RequestHandler):
+    def initialize(self):
+        '''database init'''
+        self.sid = self.get_secure_cookie("sid")
+    def get(self):
+        self.write( tornado.escape.json_encode( {'result': False, 'info': '拒绝GET请求！！' } ) )
+    def post(self):
+        self.set_header("Accept-Charset", "utf-8")
+        req = { 'value': self.get_argument("value") }
+        res = player.setVolume( req['value'] )
+        self.write( tornado.escape.json_encode( {'result': True, 'info': 'success！！' } ) )
 # 获取最新的专辑
 class AjaxNewAlbumsHandler(tornado.web.RequestHandler):
     def initialize(self):
@@ -212,6 +222,21 @@ class AjaxNewAlbumsHandler(tornado.web.RequestHandler):
         #self.set_secure_cookie("sid",self.data['_id'])
     def get(self):
     	self.write( tornado.escape.json_encode( {'result': False, 'info': '拒绝GET请求！！' } ) )
+    def post(self):
+        self.set_header("Accept-Charset", "utf-8")
+        NetEase.refresh()
+        req = { 'offset': self.get_argument("offset"), 'limit': self.get_argument("limit") }
+        res = NetEase.new_albums( req['offset'],req['limit'] )
+        self.write( tornado.escape.json_encode(res) )
+# 获取最热歌单
+class AjaxHotSongHandler(tornado.web.RequestHandler):
+    def initialize(self):
+        '''database init'''
+        self.sid = self.get_secure_cookie("sid")
+        #self.data = session.get(self.sid)
+        #self.set_secure_cookie("sid",self.data['_id'])
+    def get(self):
+        self.write( tornado.escape.json_encode( {'result': False, 'info': '拒绝GET请求！！' } ) )
     def post(self):
         self.set_header("Accept-Charset", "utf-8")
         NetEase.refresh()

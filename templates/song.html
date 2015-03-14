@@ -20,6 +20,20 @@
                     </center>
                     <br>
 
+                    <center>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title glyphicon glyphicon-tasks">音量 ：</div>
+                                <div class="item-input"> 
+                                    <div class="range-slider">
+                                        <input id="volume" class="set-volume" type="range" min="0" max="1" value="0.5" step="0.1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                    <br>
+
                     <ul id="list-album">
                         {% for item in data %}
                         <li>
