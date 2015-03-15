@@ -201,7 +201,11 @@ class NetEase:
 
     # 热门单曲 http://music.163.com/#/discover/toplist 50
     def top_songlist(self, offset=0, limit=20):
+<<<<<<< HEAD
         action = 'http://music.163.com/discover/toplist?limit='+limit
+=======
+        action = 'http://music.163.com/discover/toplist'
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
         try:
             connection = requests.get(action, headers=self.header, timeout=default_timeout)
             connection.encoding = 'UTF-8'
@@ -236,7 +240,11 @@ class NetEase:
     # song ids --> song urls ( details )
     def songs_detail(self, ids, offset=0):
         tmpids = ids[offset:]
+<<<<<<< HEAD
         tmpids = tmpids[0:30]
+=======
+        tmpids = tmpids[0:100]
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
         tmpids = map(str, tmpids)
         action = 'http://music.163.com/api/song/detail?ids=[' + (',').join(tmpids) + ']'+'&csrf_token='+self.cookies['__csrf']
         try:

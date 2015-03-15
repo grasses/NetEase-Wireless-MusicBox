@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/usr/local/Cellar/python
+=======
+#!/usr/local/Cellar/python python
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
 #-*- coding: utf-8 -*-
 
 import tornado.auth
@@ -30,7 +34,11 @@ import uuid
 import hashlib 
 
 # mongodb
+<<<<<<< HEAD
 # import pymongo
+=======
+import pymongo
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
 # session
 #from mongosion import Session
 #import session
@@ -40,6 +48,7 @@ from tornado.options import define, options
 
 
 #some global information like session
+<<<<<<< HEAD
 
 import play
 import api
@@ -48,6 +57,17 @@ import api
 global player
 player = play.Play()
 
+=======
+global isAdmin
+global isLogin
+global user
+global base_url
+global sid
+global typeList
+
+import api
+
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
 define("port", default=80, help="run on the given port", type=int)
 define("db", default='jueShare', help="database name", type=str)
 define("user", default='root', help="database user", type=str)
@@ -72,8 +92,11 @@ class Application(tornado.web.Application):
             (r"/ajaxLogin", AjaxLoginHandler),
             (r"/ajaxPlayMusic", AjaxPlayMusicHandler),
             (r"/ajaxNewAlbums", AjaxNewAlbumsHandler),
+<<<<<<< HEAD
             (r"/ajaxHotSong", AjaxHotSongHandler),
             (r"/ajaxSetVolume", AjaxSetVolumeHandler),
+=======
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
         ]
         
         settings = dict(
@@ -152,7 +175,12 @@ class AjaxPlayMusicHandler(tornado.web.RequestHandler):
     def post(self):
         self.set_header("Accept-Charset", "utf-8")
         req = { 'sid':self.get_argument("sid"), 'url':self.get_argument("url"), } 
+<<<<<<< HEAD
         #player.start()
+=======
+        import play
+        player = play.Play()
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
         player.setUrl( req['url'] )
         player.main()
         self.write( tornado.escape.json_encode( {'result': True, 'info': 'play now...！！' } ) )
@@ -201,6 +229,7 @@ class AjaxGetAlbumHandler(tornado.web.RequestHandler):
         req = { 'aid':self.get_argument("aid") } 
         res = NetEase.album(  req['aid'] )
         self.write( tornado.escape.json_encode(res) )
+<<<<<<< HEAD
 # 调节音量
 class AjaxSetVolumeHandler(tornado.web.RequestHandler):
     def initialize(self):
@@ -213,6 +242,9 @@ class AjaxSetVolumeHandler(tornado.web.RequestHandler):
         req = { 'value': self.get_argument("value") }
         res = player.setVolume( req['value'] )
         self.write( tornado.escape.json_encode( {'result': True, 'info': 'success！！' } ) )
+=======
+
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
 # 获取最新的专辑
 class AjaxNewAlbumsHandler(tornado.web.RequestHandler):
     def initialize(self):
@@ -226,6 +258,7 @@ class AjaxNewAlbumsHandler(tornado.web.RequestHandler):
         self.set_header("Accept-Charset", "utf-8")
         NetEase.refresh()
         req = { 'offset': self.get_argument("offset"), 'limit': self.get_argument("limit") }
+<<<<<<< HEAD
         res = NetEase.new_albums( req['offset'],req['limit'] )
         self.write( tornado.escape.json_encode(res) )
 # 获取最热歌单
@@ -241,6 +274,8 @@ class AjaxHotSongHandler(tornado.web.RequestHandler):
         self.set_header("Accept-Charset", "utf-8")
         NetEase.refresh()
         req = { 'offset': self.get_argument("offset"), 'limit': self.get_argument("limit") }
+=======
+>>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
         res = NetEase.top_songlist( req['offset'],req['limit'] )
         self.write( tornado.escape.json_encode(res) )
 
