@@ -29,7 +29,7 @@ NetEase Wireless MusicBox是一个基于网易云音乐API的无线音箱系统�
 
 # 设备原理
 
-![MusicBox](/image/2015-03-15-netease-wireless-music-box-04.png)
+![MusicBox](http://homeway.me/image/2015-03-15-netease-wireless-music-box-04.png)
 
 树莓派做服务器，手机web端作为客户端，两者必须在一个网段内。
 
