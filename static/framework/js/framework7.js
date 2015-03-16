@@ -307,7 +307,7 @@
                 el;
         
             view.handleTouchStart = function (e) {
-                console.log('start',e);
+                //console.log('start',e);
                 if (!allowViewTouchMove || !view.params.swipeBackPage || isTouched || app.swipeoutOpenedEl) return;
                 isMoved = false;
                 isTouched = true;
@@ -451,7 +451,7 @@
             };
         
             view.handleTouchEnd = function (e) {
-                console.log('end',e);
+                //console.log('end',e);
                 var _target = $(e.path[0]);
                 
                 if (!isTouched || !isMoved) {

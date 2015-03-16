@@ -30,7 +30,7 @@ import logging
 
 # cookie_secret
 import base64 
-import uuid 
+import uuid  
 import hashlib 
 
 # mongodb
@@ -50,7 +50,13 @@ import api
 
 # 先初始化播放器
 global player
-player = play.Play()
+# mongodb数据库
+option = {
+    'host':'localhost',
+    'port': 27017,
+    'db':'MusicBox',   
+}
+player = play.Play(option)
 
 define("port", default=80, help="run on the given port", type=int)
 define("db", default='jueShare', help="database name", type=str)
@@ -156,9 +162,7 @@ class AjaxPlayMusicHandler(tornado.web.RequestHandler):
     def post(self):
         self.set_header("Accept-Charset", "utf-8")
         req = { 'sid':self.get_argument("sid"), 'url':self.get_argument("url"), } 
-        #player.start()
-        player.setUrl( req['url'] )
-        player.main()
+        player.play_music( req['sid'] )
         self.write( tornado.escape.json_encode( {'result': True, 'info': 'play now...！！' } ) )
 # 登录网易云
 class AjaxLoginHandler(tornado.web.RequestHandler):

@@ -14,12 +14,8 @@ $(document).ready(function(){
 	var view3 = myApp.addView('#view-3');
 	var view4 = myApp.addView('#view-4');
 
-	console.log(view2);
+	//console.log(view2);
 	
-	$('.set_volume').click(function (e){
-		alert('set');
-	});
-
 	$('#search').click( function (e){
 		var data = {
 			'key': $('#key').val(),
