@@ -307,10 +307,7 @@
                 el;
         
             view.handleTouchStart = function (e) {
-<<<<<<< HEAD
                 console.log('start',e);
-=======
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
                 if (!allowViewTouchMove || !view.params.swipeBackPage || isTouched || app.swipeoutOpenedEl) return;
                 isMoved = false;
                 isTouched = true;
@@ -322,10 +319,7 @@
             };
         
             view.handleTouchMove = function (e) {
-<<<<<<< HEAD
                 //console.log('move',e);
-=======
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
                 if (!isTouched) return;
                 var pageX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
                 var pageY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
@@ -457,12 +451,9 @@
             };
         
             view.handleTouchEnd = function (e) {
-<<<<<<< HEAD
                 console.log('end',e);
                 var _target = $(e.path[0]);
                 
-=======
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
                 if (!isTouched || !isMoved) {
                     isTouched = false;
                     isMoved = false;
@@ -558,11 +549,7 @@
             };
             view.attachEvents = function (detach) {
                 var action = detach ? 'off' : 'on';
-<<<<<<< HEAD
                 container[action](app.touchEvents.start, view.handleTouchStart); 
-=======
-                container[action](app.touchEvents.start, view.handleTouchStart);
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
                 container[action](app.touchEvents.move, view.handleTouchMove);
                 container[action](app.touchEvents.end, view.handleTouchEnd);
             };
@@ -3331,7 +3318,6 @@
                 url: e.parent().attr('data-url'),
                 sid : e.parent().attr('data-id'),
             }
-<<<<<<< HEAD
             $.ajax({
                 url : '/ajaxPlayMusic',
                 method : 'POST',
@@ -3376,34 +3362,6 @@
                 },
             });
         };
-=======
-            $.post( '/ajaxPlayMusic', req, function(){
-                alert('llll');
-            }, 'json' );
-        }
-
-        app.load_refash = function (){
-            $.ajax({
-            url : '/ajaxNewAlbums',
-            method : 'POST',
-            dataType: 'json',
-            data : {'offset': 0, 'limit':10 },
-            beforeSend: function( xhr ) {
-                //菊花转起来
-            },
-            success: function( res ){
-                //console.log(res);
-                var result = res;
-                var html ='<li><div class="item-content"><div class="item-inner"><div class="item-title">歌曲</div><div class="item-after">歌手</div></div></div></li>';
-                for( var i=0; i<result.length; i++){
-                    console.log( result[i]['id'] );
-                    html += '<li><a href="/album.html?aid='+result[i]['id']+'" class="item-link"><div class="item-content"><div class="item-inner"><div class="item-title">'+result[i]['name']+'</div><div class="item-after">'+result[i]['artists'][0]['name']+'</div></div></div></a></li>';
-                    $('#list-album').html(html).slideDown( {duration: 1000, easing: 'easeOutQubic'});
-                }
-            },
-            });
-        }
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
 
         app.closePanel = function () {
             var activePanel = $('.panel.active');
@@ -6072,10 +6030,7 @@
         app.initClickEvents = function () {
             function handleScrollTop(e) {
                 /*jshint validthis:true */
-<<<<<<< HEAD
 
-=======
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
                 var clicked = $(this);
                 var target = $(e.target);
                 var isLink = clicked[0].nodeName.toLowerCase() === 'a' ||
@@ -6151,15 +6106,11 @@
         
                 // Collect Clicked data- attributes
                 var clickedData = clicked.dataset();
-<<<<<<< HEAD
 
                 if( clicked.hasClass('set-volume') ){
                     app.set_volume( clicked );
                 }
 
-=======
-        
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
                 // Smart Select
                 if (clicked.hasClass('smart-select')) {
                     if (app.smartSelectOpen) app.smartSelectOpen(clicked);
@@ -6280,15 +6231,6 @@
                     }
                 }
 
-<<<<<<< HEAD
-=======
-                // 修改
-                if (clicked.hasClass('aaa')) {
-                    console.log('fuck');
-                    $('#left-panel').click();
-                }
-
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
                 if (clicked.hasClass('open-picker')) {
                     var pickerToOpen;
                     if (clickedData.picker) {
@@ -6423,11 +6365,7 @@
                     else view.router.load(options);
                 }
             }
-<<<<<<< HEAD
             $(document).on('click', 'set-volume, a, .open-panel, .close-panel, .panel-overlay, .modal-overlay, .popup-overlay, .swipeout-delete, .swipeout-close, .close-popup, .open-popup, .open-popover, .open-login-screen, .close-login-screen .smart-select, .toggle-sortable, .open-sortable, .close-sortable, .accordion-item-toggle, .close-picker, .set-volume', handleClicks);
-=======
-            $(document).on('click', 'a, .open-panel, .close-panel, .panel-overlay, .modal-overlay, .popup-overlay, .swipeout-delete, .swipeout-close, .close-popup, .open-popup, .open-popover, .open-login-screen, .close-login-screen .smart-select, .toggle-sortable, .open-sortable, .close-sortable, .accordion-item-toggle, .close-picker', handleClicks);
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
             if (app.params.scrollTopOnNavbarClick || app.params.scrollTopOnStatusbarClick) {
                 $(document).on('click', '.statusbar-overlay, .navbar .center', handleScrollTop);
             }
@@ -6436,10 +6374,7 @@
             function preventScrolling(e) {
                 e.preventDefault();
             }
-<<<<<<< HEAD
 
-=======
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
             if (app.support.touch) {
                 $(document).on((app.params.fastClicks ? 'touchstart' : 'touchmove'), '.panel-overlay, .modal-overlay, .preloader-indicator-overlay, .popup-overlay, .searchbar-overlay', preventScrolling);
             }

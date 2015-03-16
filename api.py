@@ -1,7 +1,9 @@
-#!/usr/bin/env python
+#!/usr/local/Cellar/python
 # -*- coding: utf-8 -*-
+
 # @Author: homeway
-# @Date:   2015-03-13
+# @Link: http://homeway.me
+# @Version: 15.03.15
 
 
 '''
@@ -24,9 +26,6 @@ def uniq(arr):
 
 
 default_timeout = 10
-
-#log = logger.getLogger(__name__)
-
 
 class NetEase:
     def __init__(self):
@@ -201,11 +200,7 @@ class NetEase:
 
     # 热门单曲 http://music.163.com/#/discover/toplist 50
     def top_songlist(self, offset=0, limit=20):
-<<<<<<< HEAD
         action = 'http://music.163.com/discover/toplist?limit='+limit
-=======
-        action = 'http://music.163.com/discover/toplist'
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
         try:
             connection = requests.get(action, headers=self.header, timeout=default_timeout)
             connection.encoding = 'UTF-8'
@@ -240,11 +235,7 @@ class NetEase:
     # song ids --> song urls ( details )
     def songs_detail(self, ids, offset=0):
         tmpids = ids[offset:]
-<<<<<<< HEAD
         tmpids = tmpids[0:30]
-=======
-        tmpids = tmpids[0:100]
->>>>>>> c71daf5b84e7275ce21792461cf95dbc11265f32
         tmpids = map(str, tmpids)
         action = 'http://music.163.com/api/song/detail?ids=[' + (',').join(tmpids) + ']'+'&csrf_token='+self.cookies['__csrf']
         try:

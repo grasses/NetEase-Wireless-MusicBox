@@ -1,5 +1,9 @@
-#-*- coding: UTF-8 -*-
-#!/usr/bin/python
+#!/usr/local/Cellar/python
+# -*- coding: utf-8 -*-
+
+# @Author: homeway
+# @Link: http://homeway.me
+# @Version: 15.03.15
 
 import os
 import time
