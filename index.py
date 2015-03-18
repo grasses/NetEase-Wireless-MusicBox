@@ -1,9 +1,9 @@
 #!/usr/local/Cellar/python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 # @Author: homeway
 # @Link: http://homeway.me
-# @Version: 15.03.15
+# @Version: 15.03.17
 
 import tornado.auth
 import tornado.escape
@@ -59,7 +59,7 @@ option = {
 player = play.Play(option)
 
 define("port", default=80, help="run on the given port", type=int)
-define("db", default='jueShare', help="database name", type=str)
+define("db", default='MusicBox', help="database name", type=str)
 define("user", default='root', help="database user", type=str)
 define("pwd", default='xiaocao', help="database password", type=str) 
 

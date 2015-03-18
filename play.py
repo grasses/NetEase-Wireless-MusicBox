@@ -1,5 +1,9 @@
-#!/usr/local/bin/python2.7
-#-*- coding: utf-8 -*-
+#!/usr/local/Cellar/python
+# -*- coding: utf-8 -*-
+
+# @Author: homeway
+# @Link: http://homeway.me
+# @Version: 15.03.17
 
 import pygame
 import pymongo
@@ -25,7 +29,7 @@ class Play(MusicData):
         self.music_option = {
             'frequence' : 44100,
             'bitsize' : -16,
-            'channels' : 2,
+            'channels' : 1,
             'buffer' : 2048,
         }
         self.music_info={

@@ -3,7 +3,7 @@
 
 # @Author: homeway
 # @Link: http://homeway.me
-# @Version: 15.03.15
+# @Version: 15.03.17
 
 
 '''
@@ -225,7 +225,7 @@ class NetEase:
 
     # album id --> song id set
     def album(self, album_id):
-        action = 'http://music.163.com/api/album/' + str(album_id)
+        action = 'http://music.163.com/api/album/' + str(album_id)+'&csrf_token='+self.cookies['__csrf']
         try:
             data = self.httpRequest('GET', action)
             return data['album']['songs']
@@ -256,7 +256,7 @@ class NetEase:
 
     # 今日最热（0）, 本周最热（10），历史最热（20），最新节目（30）
     def djchannels(self, stype=0, offset=0, limit=50):
-        action = 'http://music.163.com/discover/djchannel?type=' + str(stype) + '&offset=' + str(offset) + '&limit=' + str(limit)
+        action = 'http://music.163.com/discover/djchannel?type=' + str(stype) + '&offset=' + str(offset) + '&limit=' + str(limit)+'&csrf_token='+self.cookies['__csrf']
         try:
             connection = requests.get(action, headers=self.header, timeout=default_timeout)
             connection.encoding = 'UTF-8'
@@ -271,7 +271,7 @@ class NetEase:
     def channel_detail(self, channelids, offset=0):
         channels = []
         for i in range(0, len(channelids)):
-            action = 'http://music.163.com/api/dj/program/detail?id=' + str(channelids[i])
+            action = 'http://music.163.com/api/dj/program/detail?id=' + str(channelids[i])+'&csrf_token='+self.cookies['__csrf']
             try:
                 data = self.httpRequest('GET', action)
                 channel = self.dig_info(data['program']['mainSong'], 'channels')
