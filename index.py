@@ -64,7 +64,7 @@ define("user", default='root', help="database user", type=str)
 define("pwd", default='xiaocao', help="database password", type=str) 
 
 NetEase = api.NetEase()
-login = NetEase.login('15958153676', '0814891WLT')
+login = NetEase.login('username', 'password')
 
 class Application(tornado.web.Application):
     '''setting || main || router'''
