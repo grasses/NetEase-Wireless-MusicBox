@@ -32,7 +32,7 @@ class Play(threading.Thread):
     def playMusicThread(self, music_file):
         clock = pg.time.Clock()
         try:
-            pg.mixer.music.load('music/5678977557560404.mp3')#music_file)
+            pg.mixer.music.load(music_file)
             print("Music file {} loaded!".format(music_file))
         except pg.error:
             print("File {} error! {}".format(music_file, pg.get_error()))
