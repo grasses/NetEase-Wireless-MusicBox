@@ -76,7 +76,7 @@ class Play(MusicData):
     # search by api and get info
     def search_music_info(self, sid):
         NetEase = api.NetEase()
-        login = NetEase.login('15958153676', '0814891WLT')
+        login = NetEase.login('username', 'password')
         music_data = NetEase.song_detail(sid)
         self.music_info['mp3Url'] = music_data[0]['mp3Url']
         self.music_info['name'] = music_data[0]['name']
