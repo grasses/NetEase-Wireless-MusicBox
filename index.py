@@ -157,7 +157,7 @@ class AjaxPlayMusicHandler(tornado.web.RequestHandler):
         self.sid = self.get_secure_cookie("sid")
         #self.data = session.get(self.sid)
         #self.set_secure_cookie("sid",self.data['_id'])
-    def post(self):
+    def get(self):
     	self.write( tornado.escape.json_encode( {'result': False, 'info': '拒绝GET请求！！' } ) )
     def post(self):
         self.set_header("Accept-Charset", "utf-8")
